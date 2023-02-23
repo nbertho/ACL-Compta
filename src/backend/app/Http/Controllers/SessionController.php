@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\JsonHelper;
 use App\Models\Session;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
 
-    public function index()
+    public function index(): string
     {
-        return Session::query()
+        $sessionList = Session::query()
             ->orderBy('date', 'DESC')
             ->with(['patients', 'session_type', 'session_type.locations'])
             ->take(5)
             ->get();
+        return JsonHelper::formatResponse($sessionList, 200);
     }
 
-    public function show(Session $session)
+    public function show(string $sessionId): string
     {
-        return $session::query()
+        $session = Session::query()
+            ->where('id', '=', $sessionId)
             ->with(['patients', 'session_type', 'session_type.locations'])
-            ->get();
+            ->first();
+        return JsonHelper::formatResponse($session);
     }
 }
