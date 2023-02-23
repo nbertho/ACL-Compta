@@ -18,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/sessions', [SessionController::class, 'index']);
 
 Route::get('/session/{session}', [SessionController::class, 'show']);
+Route::post('/session/create', [SessionController::class, 'create']);
+Route::put('/session/update/{session_id}', [SessionController::class, 'update']);
+Route::delete('/session/delete/{session_id}', [SessionController::class, 'delete']);

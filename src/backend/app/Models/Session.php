@@ -12,6 +12,13 @@ class Session extends Model
 
     protected $table = 'sessions';
 
+    protected $fillable = [
+        'date',
+        'patient_id',
+        'session_type_id',
+        'is_present',
+    ];
+
     public function patients()
     {
         return $this->hasOne(Patient::class, 'id', 'patient_id');
