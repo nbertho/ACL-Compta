@@ -11,4 +11,9 @@ class Locations extends Model
 
     protected $table = 'locations';
 
+    protected $fillable = [
+        'name',
+        'address'
+    ];
+
 }
