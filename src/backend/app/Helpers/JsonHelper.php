@@ -28,8 +28,7 @@ class JsonHelper
                 throw new \Exception("'msg' key not found in data array");
             }
         }
-
-        return response()->json([
+        return json_encode([
             'status' => $statusCode,
             'error' => $error,
             'data' => $data
