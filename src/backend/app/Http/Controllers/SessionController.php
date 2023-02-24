@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HttpCode;
 use App\Helpers\JsonHelper;
+use App\Helpers\ResponseHelper;
 use App\Models\Session;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -33,7 +34,6 @@ class SessionController extends Controller
 
     public function create(Request $request): string
     {
-        $error = false;
         $validator = Validator::make(
             $request->all(),
             [
@@ -43,48 +43,31 @@ class SessionController extends Controller
                 'is_present' => 'required',
             ]
         );
-
         if ($validator->fails()) {
-            $errorsArray = $validator->errors()->messages();
-
-            $httpCode = HttpCode::VALIDATION_MISSING_PARAMS;
-            $error = true;
-            $data = [
-                'msg' => 'Missing fields : ' . join(', ', array_keys($errorsArray)),
-                'missing_fields' => array_keys($errorsArray),
-            ];
+            return ResponseHelper::getValidatorFailedResponse($validator);
         }
 
-        if (!$error) {
-            try {
-                $data = Session::query()->create($request->all());
-                $httpCode = HttpCode::CREATED;
-            } catch (QueryException $exception) {
-                $httpCode = HttpCode::DB_ERROR;
-                $error = true;
-                $data = ['msg' => $exception->getMessage()];
-            }
+        try {
+            $data = Session::query()->create($request->all());
+            $httpCode = HttpCode::CREATED;
+        } catch (QueryException $exception) {
+            return JsonHelper::formatResponse(
+                ['msg' => $exception->getMessage()],
+                HttpCode::DB_ERROR,
+                true
+            );
         }
 
-        return JsonHelper::formatResponse($data, $httpCode, $error);
+        return JsonHelper::formatResponse($data, $httpCode);
 
     }
 
-    public function delete(Request $request, string $id): string
+    public function delete(string $id): string
     {
 
         $deleteResult = Session::destroy($id);
-        if ($deleteResult === 0) {
-            $httpCode = HttpCode::DB_ERROR;
-            $error = true;
-            $data = ['msg' => 'No matching id found, nothing was deleted'];
-        } else {
-            $httpCode = HttpCode::SUCCESS;
-            $error = false;
-            $data = ['msg' => 'Session successfully deleted', 'session_id' => $request->get('id')];
-        }
 
-        return JsonHelper::formatResponse($data, $httpCode, $error);
+        return ResponseHelper::getDeleteResponse($deleteResult, $id);
     }
 
     public function update(Request $request, string $id): string
@@ -99,35 +82,26 @@ class SessionController extends Controller
                 'is_present' => 'required',
             ]
         );
-
         if ($validator->fails()) {
-            $errorsArray = $validator->errors()->messages();
-            $httpCode = HttpCode::VALIDATION_MISSING_PARAMS;
-            $error = true;
-            $data = [
-                'msg' => 'Missing fields : ' . join(', ', array_keys($errorsArray)),
-                'missing_fields' => array_keys($errorsArray),
-            ];
+            return ResponseHelper::getValidatorFailedResponse($validator);
         }
 
-        if (!$error) {
-            try {
-                $updateData = Session::query()
-                    ->where('id', '=', $id)
-                    ->update($request->all());
-                if ($updateData === 1) {
-                    $data = ['msg' => $updateData . ' row affected'];
-                    $httpCode = HttpCode::SUCCESS;
-                } else {
-                    $httpCode = HttpCode::DB_ERROR;
-                    $error = true;
-                    $data = ['msg' => 'No rows affected.'];
-                }
-            } catch (QueryException $exception) {
+        try {
+            $updateData = Session::query()
+                ->where('id', '=', $id)
+                ->update($request->all());
+            if ($updateData === 1) {
+                $data = ['msg' => $updateData . ' row affected'];
+                $httpCode = HttpCode::SUCCESS;
+            } else {
                 $httpCode = HttpCode::DB_ERROR;
                 $error = true;
-                $data = ['msg' => $exception->getMessage()];
+                $data = ['msg' => 'No rows affected.'];
             }
+        } catch (QueryException $exception) {
+            $httpCode = HttpCode::DB_ERROR;
+            $error = true;
+            $data = ['msg' => $exception->getMessage()];
         }
         return JsonHelper::formatResponse($data, $httpCode, $error);
     }
