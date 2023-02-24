@@ -20,7 +20,7 @@ class SessionController extends Controller
             ->with(['patients', 'session_type', 'session_type.locations'])
             ->take(5)
             ->get();
-        return JsonHelper::formatResponse($sessionList, 200);
+        return JsonHelper::formatResponse($sessionList);
     }
 
     public function show(string $sessionId): string
@@ -67,7 +67,7 @@ class SessionController extends Controller
 
         $deleteResult = Session::destroy($id);
 
-        return ResponseHelper::getDeleteResponse($deleteResult, $id);
+        return ResponseHelper::getDeleteResponse($deleteResult, $id, 'Session');
     }
 
     public function update(Request $request, string $id): string

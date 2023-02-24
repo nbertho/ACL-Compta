@@ -5,29 +5,41 @@ namespace App\Http\Controllers;
 use App\Helpers\HttpCode;
 use App\Helpers\JsonHelper;
 use App\Helpers\ResponseHelper;
-use App\Models\Locations;
+use App\Models\Patient;
+use App\Models\Session;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class LocationController extends Controller
+class PatientsController extends Controller
 {
 
-    public function index()
+    public function index(): string
     {
-        $locations = Locations::query()
-            ->orderBy('name', 'DESC')
+        $patientList = Patient::query()
+            ->orderBy('lastname', 'ASC')
+            ->take(50)
             ->get();
-        return JsonHelper::formatResponse($locations);
+        return JsonHelper::formatResponse($patientList);
     }
 
-    public function create(Request $request)
+    public function show(string $patientId): string
+    {
+        $session = Patient::query()
+            ->where('id', '=', $patientId)
+            ->first();
+        return JsonHelper::formatResponse($session);
+    }
+
+    public function create(Request $request): string
     {
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required',
-                'address' => 'required',
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'birth_date' => 'required|date_format:Y-m-d H:i:s',
+                'description' => 'required',
             ]
         );
         if ($validator->fails()) {
@@ -35,7 +47,7 @@ class LocationController extends Controller
         }
 
         try {
-            $data = Locations::query()->create($request->all());
+            $data = Patient::query()->create($request->all());
             $httpCode = HttpCode::CREATED;
         } catch (QueryException $exception) {
             return JsonHelper::formatResponse(
@@ -44,17 +56,29 @@ class LocationController extends Controller
                 true
             );
         }
+
         return JsonHelper::formatResponse($data, $httpCode);
+
     }
 
-    public function update(Request $request, string $id)
+    public function delete(string $id): string
+    {
+
+        $deleteResult = Patient::destroy($id);
+
+        return ResponseHelper::getDeleteResponse($deleteResult, $id, 'Patient');
+    }
+
+    public function update(Request $request, string $id): string
     {
         $error = false;
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required',
-                'address' => 'required',
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'birth_date' => 'required|date_format:Y-m-d H:i:s',
+                'description' => 'required',
             ]
         );
         if ($validator->fails()) {
@@ -62,7 +86,7 @@ class LocationController extends Controller
         }
 
         try {
-            $updateData = Locations::query()
+            $updateData = Patient::query()
                 ->where('id', '=', $id)
                 ->update($request->all());
             if ($updateData === 1) {
@@ -78,15 +102,16 @@ class LocationController extends Controller
             $error = true;
             $data = ['msg' => $exception->getMessage()];
         }
-
         return JsonHelper::formatResponse($data, $httpCode, $error);
     }
 
-    public function delete(string $id)
+    public function getPatientSessions($patientId)
     {
-        $deleteResult = Locations::destroy($id);
-        return ResponseHelper::getDeleteResponse($deleteResult, $id, 'Location');
+        $list = Session::query()
+            ->where('patient_id', '=', $patientId)
+            ->with('session_type', 'session_type.locations')
+            ->get();
+        return JsonHelper::formatResponse($list);
     }
-
 
 }
