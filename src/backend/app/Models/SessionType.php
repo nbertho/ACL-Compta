@@ -11,10 +11,19 @@ class SessionType extends Model
 
     protected $table = 'session_type';
 
+    protected $fillable = [
+        'name',
+        'description',
+        'length',
+        'price',
+        'location_id'
+    ];
+
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+
     public function locations()
     {
         return $this->hasOne(Locations::class, 'id', 'location_id');

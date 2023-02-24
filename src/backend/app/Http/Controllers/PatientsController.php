@@ -18,7 +18,6 @@ class PatientsController extends Controller
     {
         $patientList = Patient::query()
             ->orderBy('lastname', 'ASC')
-            ->take(50)
             ->get();
         return JsonHelper::formatResponse($patientList);
     }
