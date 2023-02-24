@@ -11,4 +11,16 @@ class Patient extends Model
 
     protected $table = 'patients';
 
+    protected $fillable = [
+        'firstname',
+        'lastname',
+        'birth_date',
+        'description',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
 }

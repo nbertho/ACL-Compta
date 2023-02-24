@@ -19,6 +19,11 @@ class Session extends Model
         'is_present',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function patients()
     {
         return $this->hasOne(Patient::class, 'id', 'patient_id');
