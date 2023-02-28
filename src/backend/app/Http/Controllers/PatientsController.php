@@ -39,6 +39,20 @@ class PatientsController extends Controller
                 'lastname' => 'required',
                 'birth_date' => 'required|date_format:Y-m-d H:i:s',
                 'description' => 'required',
+                'national_number' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+                'nationality' => 'required',
+                'languages_spoken_at_home' => 'required',
+                'follow_up_reasons' => 'required',
+                'school' => 'required',
+                'school_year' => 'required',
+                'mutuality' => 'required',
+                'family' => 'required',
+                'medical_background' => 'required',
+                'educational_background' => 'required',
+                'hobbies' => 'required',
+                'contacts' => 'required'
             ]
         );
         if ($validator->fails()) {
@@ -78,6 +92,20 @@ class PatientsController extends Controller
                 'lastname' => 'required',
                 'birth_date' => 'required|date_format:Y-m-d H:i:s',
                 'description' => 'required',
+                'national_number' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+                'nationality' => 'required',
+                'languages_spoken_at_home' => 'required',
+                'follow_up_reasons' => 'required',
+                'school' => 'required',
+                'school_year' => 'required',
+                'mutuality' => 'required',
+                'family' => 'required',
+                'medical_background' => 'required',
+                'educational_background' => 'required',
+                'hobbies' => 'required',
+                'contacts' => 'required'
             ]
         );
         if ($validator->fails()) {

@@ -16,6 +16,20 @@ class Patient extends Model
         'lastname',
         'birth_date',
         'description',
+        'national_number',
+        'phone',
+        'address',
+        'nationality',
+        'languages_spoken_at_home',
+        'follow_up_reasons',
+        'school',
+        'school_year',
+        'mutuality',
+        'family',
+        'medical_background',
+        'educational_background',
+        'hobbies',
+        'contacts'
     ];
 
     protected $hidden = [
