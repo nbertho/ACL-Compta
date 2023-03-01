@@ -14,6 +14,11 @@ export default createRouter({
       component: () => import('../components/pages/PatientsPage')
     },
     {
+      name: 'patientDetails',
+      path: '/patients/:patientId',
+      component: () => import('../components/pages/PatientDetails')
+    },
+    {
       name: 'sessions',
       path: '/sessions',
       component: () => import('../components/pages/SessionsPage')    

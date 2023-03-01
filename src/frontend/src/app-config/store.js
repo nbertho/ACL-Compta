@@ -13,6 +13,9 @@ export default createStore({
     getPatients(state) {
       return state.patients;
     },
+    getPatientById: (state) => (id) => {
+      return state.patients.find(patient => patient.id == id);
+    },
     getSessions(state) {
       return state.sessions;
     },
@@ -22,13 +25,22 @@ export default createStore({
     getSessionType(state) {
       return state.session_types;
     },
-    letLocations(state) {
+    getLocations(state) {
       return state.locations;
-    }
+    },
   },
   mutations: {
     setPatients(state, data) {
       state.patients = data;
+    },
+    setSinglePatient(state, data) {
+      const i = state.patients.findIndex(patient => patient.id == data.id);
+      if (i > -1) {
+        state.patients[i] = data;
+      }
+      else {
+        state.patients.push(data);
+      }
     },
     setSessions(state, data) {
       state.sessions = data;
@@ -43,6 +55,9 @@ export default createStore({
   actions: {
     setPatients({commit}, items) {
       commit('setPatients', items);
+    },
+    setSinglePatient({commit}, items) {
+      commit('setSinglePatient', items);
     },
     setSessions({commit}, items) {
       commit('setSessions', items);

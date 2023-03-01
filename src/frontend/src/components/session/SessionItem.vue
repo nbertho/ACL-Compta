@@ -1,5 +1,5 @@
 <template>
-  <li class="grid grid-flow-col w-auto border border-black mb-4 rounded shadow-sm hover:shadow-gray-600 hover:shadow-lg shadow-gray-600 cursor-pointer p-4">
+  <li class="grid grid-flow-col grid-cols-12 w-auto border border-black mb-4 rounded shadow-sm hover:shadow-gray-600 hover:shadow-lg shadow-gray-600 cursor-pointer p-4">
     <div class="col-span-4 flex flex-col justify-around">
       <p>{{ date }}</p>
       <p>{{ session.session_type.name }} - {{ session.session_type.length }} minutes</p>
@@ -35,11 +35,7 @@ export default({
       let minutes = ("0" + date.getMinutes()).slice(-2);
       
       return `${weekday} ${dayNumber} ${month} ${year}, à ${hours}:${minutes}`
-}
-
+    }
   },
-  mounted() {
-    console.log(this.is_present)
-  }
 });
 </script>

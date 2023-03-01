@@ -1,7 +1,7 @@
 <template>
-  <h1 class="text-center text-2xl">Accueil</h1>
+  <h1 class="text-center text-2xl underline">Accueil</h1>
   <section class="container mx-auto mt-8">
-    <h2>Dernière séances</h2>
+    <h2 class="text-xl underline mb-4">Mes dernières séances</h2>
     <ul>
       <SessionsItem 
         v-for="session in latestSessions" 

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-center text-2xl">Patients page</h1>
+  <h1 class="text-center text-2xl underline">Mes patients</h1>
   <section class="container mx-auto mt-8">
     <PatientsFilter
       @filterByFirstName="updateFirstNameFilter"
@@ -7,12 +7,15 @@
       @filterByDob="updateDobFilter"
       @resetFilters="resetFilters"
     />
-    <ul class="mt-8">
+    <ul class="mt-8 grid grid-cols-3 gap-4" v-if="patients.length !== 0">
       <PatientListItem
         v-for="patient in patients" :key="patient.id"
         :patient="patient"
       />
     </ul>
+    <div v-else>
+      <p class="my-12">Désolé, aucun patient n'a été trouvé</p>
+    </div>
   </section>
 </template>
 
