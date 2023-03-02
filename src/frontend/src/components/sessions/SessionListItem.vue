@@ -1,17 +1,22 @@
 <template>
-  <li class="grid grid-flow-col grid-cols-12 w-auto border border-black mb-4 rounded shadow-sm hover:shadow-gray-600 hover:shadow-lg shadow-gray-600 cursor-pointer p-4">
-    <div class="col-span-4 flex flex-col justify-around">
-      <p>{{ date }}</p>
-      <p>{{ session.session_type.name }} - {{ session.session_type.length }} minutes</p>
-    </div>
-    <div class="col-span-4 flex flex-col justify-around">
-      <p class="text-left">{{ session.patients.lastname }} {{ session.patients.firstname }}</p>
-    </div>
-    <div class="col-span-4 flex flex-col justify-around">
-      <p v-if="this.session.is_present === 1" class="text-green-800 text-left"><strong>Patient présent</strong></p>
-      <p v-if="this.session.is_present === 0" class="text-red-800 text-left"><strong>Patient absent</strong></p>
-      <p class="text-left">{{ session.session_type.price }} €</p>
-    </div>
+  <li>
+    <router-link 
+      :to="{name: 'sessionDetails', params: {sessionId: session.id}}"
+      class="grid grid-flow-col grid-cols-12 w-auto border border-black mb-4 rounded shadow-sm hover:shadow-gray-600 hover:shadow-lg shadow-gray-600 cursor-pointer p-4"
+    >
+      <div class="col-span-4 flex flex-col justify-around">
+        <p>{{ date }}</p>
+        <p>{{ session.session_type.name }} - {{ session.session_type.length }} minutes</p>
+      </div>
+      <div class="col-span-4 flex flex-col justify-around">
+        <p class="text-left">{{ session.patients.lastname }} {{ session.patients.firstname }}</p>
+      </div>
+      <div class="col-span-4 flex flex-col justify-around">
+        <p v-if="this.session.is_present === 1" class="text-green-800 text-left"><strong>Patient présent</strong></p>
+        <p v-if="this.session.is_present === 0" class="text-red-800 text-left"><strong>Patient absent</strong></p>
+        <p class="text-left">{{ session.session_type.price }} €</p>
+      </div>
+    </router-link>
   </li>
 </template>
 

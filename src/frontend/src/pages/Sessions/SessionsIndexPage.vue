@@ -13,6 +13,7 @@
         v-for="session in sessions" 
         :key="session.id"
         :session="session"
+        @click="$router.push({name: 'sessionDetails', params: {sessionId: session.id}})"
       />
     </ul>
     <div v-else>

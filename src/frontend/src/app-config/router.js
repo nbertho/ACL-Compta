@@ -14,7 +14,7 @@ export default createRouter({
       component: () => import('@/pages/Patients/PatientsIndexPage')
     },
     {
-      name: 'add-patient',
+      name: 'addPatient',
       path: '/patient/new',
       component: () => import('@/pages/Patients/PatientNewPage')
     },
@@ -27,6 +27,11 @@ export default createRouter({
       name: 'sessions',
       path: '/sessions',
       component: () => import('@/pages/Sessions/SessionsIndexPage')    
+    },
+    {
+      name: 'sessionDetails',
+      path: '/session/:sessionId',
+      component: () => import('@/pages/Sessions/SessionDetailsPage')
     },
     {
       name: 'help',

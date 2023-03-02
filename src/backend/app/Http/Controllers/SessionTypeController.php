@@ -16,6 +16,7 @@ class SessionTypeController extends Controller
     {
         $sessionList = SessionType::query()
             ->with(['locations'])
+            ->orderBy('name', 'ASC')
             ->get();
         return JsonHelper::formatResponse($sessionList);
     }

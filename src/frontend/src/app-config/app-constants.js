@@ -4,6 +4,7 @@ export default {
     sessionsList: '/api/sessions',
     patientsList: '/api/patients',
     locationsList: '/api/locations',
+    sessionTypeList: '/api/session-types',
     patientFind: '/api/patient/',
     patientCreate: '/api/patient/create',
     patientUpdate: '/api/patient/update/',

@@ -26,9 +26,14 @@ export default createStore({
     getSessionsLimited(state) {
       return state.sessions.slice(0, 10);
     },
+    getSessionById : (state) => (id) => {
+      return state.sessions.find(session => session.id == id);
+    },
     getSessionType(state) {
       return state.session_types;
     },
+    getSessionTypeById: (state) => (id) => {
+      return state.session_types.find(session => session.id == id);    },
     getLocations(state) {
       return state.locations;
     },

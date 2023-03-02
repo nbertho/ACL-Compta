@@ -17,17 +17,25 @@ export default {
   },
   mounted() {
     const store = this.$store;
+    
     axios.get(appConstants.api.urlPath + appConstants.api.sessionsList)
     .then(response => {
       store.dispatch('setSessions', response.data.data);
     });
+    
     axios.get(appConstants.api.urlPath + appConstants.api.patientsList)
     .then(response => {
       store.dispatch('setPatients', response.data.data);
     });
+    
     axios.get(appConstants.api.urlPath + appConstants.api.locationsList)
     .then(response => {
       store.dispatch('setLocations', response.data.data);
+    });
+
+    axios.get(appConstants.api.urlPath + appConstants.api.sessionTypeList)
+    .then(response => {
+      store.dispatch('setSessionType', response.data.data);
     });
   }
 }

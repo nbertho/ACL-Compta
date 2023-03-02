@@ -7,7 +7,7 @@
           <button v-if="activeFilters !== ''" @click="resetFilters" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Effacer les filtres</button>
         </div>
         <div class="flex justify-end">
-          <button @click="$router.push({name: 'add-patient'})" class="btn py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Ajouter un nouveau patient</button>
+          <button @click="$router.push({name: 'addPatient'})" class="btn py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Ajouter un nouveau patient</button>
         </div>
       </div>
       <p v-if="activeFilters !== ''" class="text-left p-4">Filtres actifs :{{ activeFilters }}</p>
