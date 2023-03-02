@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-3">
     <div class="flex justify-between" v-if="editMode">
-      <button @click="toggleEditMode" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Valider les changements</button>
-      <button class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Annuler</button>
+      <input type="submit" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg cursor-pointer" value="Valider les changements">
+      <button @click="cancelChanges" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Annuler</button>
     </div>
     <div v-else>
       <button @click="toggleEditMode" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Modifier</button>
@@ -24,6 +24,9 @@ export default ({
   methods: {
     toggleEditMode() {
       this.$emit('toggle-edit');
+    },
+    cancelChanges() {
+      this.$emit('cancel-changes');
     }
   }
 })

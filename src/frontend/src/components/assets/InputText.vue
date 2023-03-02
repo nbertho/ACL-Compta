@@ -3,7 +3,7 @@
     <div v-if="editMode">
       <label class="block underline mb-2" :for="attr"><strong>{{ text }}</strong></label>
       <input 
-        :name="attr" 
+        :name="attr"
         :id="attr" 
         :type="inputType" 
         :value="value" 

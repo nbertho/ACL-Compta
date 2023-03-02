@@ -1,36 +1,41 @@
 <template>
-  
-  <section class="container m-auto">
-    <ViewPageActions @toggle-edit="toggleEditMode" :editMode="editMode" />
-  </section>
 
-  <form @submit.prevent class="container mt-8 m-auto grid grid-cols-12 gap-4">
+  <form 
+    @submit.prevent="handleForm"
+    class="container m-auto"
+  >
+    <ViewPageActions 
+      @toggle-edit="toggleEditMode" 
+      @cancel-changes="toggleEditMode"
+      :editMode="editMode" 
+    />
+    <div class="mt-8  grid grid-cols-12 gap-4">
+      <InputText class="col-span-4" attr="firstname" :value="firstname" text="Prénom" :editMode="editMode" />
+      <InputText class="col-span-4" attr="lastname" :value="lastname" text="Nom" :editMode="editMode" />
+      <InputText class="col-span-4" attr="national_number" :value="national_number" text="Numéro national" :editMode="editMode" />
+      
+      <InputText class="col-span-3" attr="birth_date" :value="birth_date" text="Date de naissance" inputType="date" :editMode="editMode" />
+      <InputText class="col-span-3" attr="phone" :value="phone" text="Téléphone" inputType="tel" :editMode="editMode" />
+      <InputText class="col-span-3" attr="nationality" :value="nationality" text="Nationalité" :editMode="editMode" />
+      <InputText class="col-span-3" attr="mutuality" :value="mutuality" text="Mutualité" :editMode="editMode" />
 
-    <InputText class="col-span-4" attr="firstname" :value="firstname" text="Prénom" :editMode="editMode" />
-    <InputText class="col-span-4" attr="lastname" :value="lastname" text="Nom" :editMode="editMode" />
-    <InputText class="col-span-4" attr="national_number" :value="national_number" text="Numéro national" :editMode="editMode" />
-    
-    <InputText class="col-span-3" attr="birth_date" :value="birth_date" text="Date de naissance" inputType="date" :editMode="editMode" />
-    <InputText class="col-span-3" attr="phone" :value="phone" text="Téléphone" inputType="tel" :editMode="editMode" />
-    <InputText class="col-span-3" attr="nationality" :value="nationality" text="Nationalité" :editMode="editMode" />
-    <InputText class="col-span-3" attr="mutuality" :value="mutuality" text="Mutualité" :editMode="editMode" />
+      
+      <InputText class="col-span-4" attr="languages_spoken_at_home" :value="languages_spoken_at_home" text="Langues parlés à la maison" :editMode="editMode" />
+      <InputText class="col-span-4" attr="school" :value="school" text="Ecole" :editMode="editMode" />
+      <InputText class="col-span-4" attr="school_year" :value="school_year" text="Année scolaire" :editMode="editMode" />
 
-    
-    <InputText class="col-span-4" attr="languages_spoken_at_home" :value="languages_spoken_at_home" text="Langues parlés à la maison" :editMode="editMode" />
-    <InputText class="col-span-4" attr="school" :value="school" text="Ecole" :editMode="editMode" />
-    <InputText class="col-span-4" attr="school_year" :value="school_year" text="Année scolaire" :editMode="editMode" />
-    
-    
 
-    <InputTextArea class="col-span-6" attr="address" :value="address" text="Addresse" :editMode="editMode" />
-    <InputTextArea class="col-span-6" attr="contacts" :value="contacts" text="Contacts" :editMode="editMode" />
-    <InputTextArea class="col-span-6" attr="family" :value="family" text="Famille" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="address" :value="address" text="Addresse" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="contacts" :value="contacts" text="Contacts" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="family" :value="family" text="Famille" :editMode="editMode" />
 
-    <InputTextArea class="col-span-6" attr="educational_background" :value="educational_background" text="Background scolaire" :editMode="editMode" />
-    <InputTextArea class="col-span-6" attr="medical_background" :value="medical_background" text="Background médicale" :editMode="editMode" />
-    <InputTextArea class="col-span-6" attr="hobbies" :value="hobbies" text="Hobbies" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="educational_background" :value="educational_background" text="Background scolaire" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="medical_background" :value="medical_background" text="Background médicale" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="hobbies" :value="hobbies" text="Hobbies" :editMode="editMode" />
 
-    <InputTextArea class="col-span-6" attr="description" :value="description" text="Description" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="follow_up_reasons" :value="follow_up_reasons" text="Raisons du suivi" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="description" :value="description" text="Description" :editMode="editMode" />
+    </div>
 
   </form>
 </template>
@@ -88,6 +93,30 @@ export default({
   },
   methods: {
     toggleEditMode() {
+      this.editMode = !this.editMode;
+    },
+    handleForm(event) {
+      const formData = new FormData(event.target);
+      const store = this.$store;
+      let putObject = {};
+      formData.forEach((value, key) => {
+        if (key === 'birth_date') {
+          value = value + ' 00:00:00'
+        }
+        putObject[key] = value
+      });
+      axios.put(appConstants.api.urlPath + appConstants.api.patientUpdate + this.$route.params.patientId, putObject)
+      .then(response => {
+        console.log(response.data.data)
+        if (!response.data.error) {
+          this.editMode = false;
+          putObject['id'] = this.$route.params.patientId;
+          store.dispatch('updatePatient', response.data.data);
+          this.updateData(putObject);
+        }
+      });
+    },
+    cancelFormChanges() {
       this.editMode = !this.editMode;
     },
     updateData(patient) {

@@ -42,6 +42,10 @@ export default createStore({
         state.patients.push(data);
       }
     },
+    updatePatient(state, data) {
+      const patientIndex = state.patients.findIndex(patient => patient.id == data.id)
+      state.patients[patientIndex] = data;
+    },
     setSessions(state, data) {
       state.sessions = data;
     },
@@ -67,6 +71,9 @@ export default createStore({
     },
     setLocations({commit}, items) {
       commit('setLocations', items);
+    },
+    updatePatient({commit}, item) {
+      commit('updatePatient', item);
     }
   }
 });
