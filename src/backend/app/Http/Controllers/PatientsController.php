@@ -37,7 +37,7 @@ class PatientsController extends Controller
             [
                 'firstname' => 'required',
                 'lastname' => 'required',
-                'birth_date' => 'required|date_format:Y-m-d H:i:s',
+                'birth_date' => 'required|date_format:Y-m-d',
                 'description' => 'required',
                 'national_number' => 'required',
                 'phone' => 'required',
@@ -90,22 +90,22 @@ class PatientsController extends Controller
             [
                 'firstname' => 'required',
                 'lastname' => 'required',
-                'birth_date' => 'required|date_format:Y-m-d H:i:s',
-                'description' => 'required',
-                'national_number' => 'required',
-                'phone' => 'required',
-                'address' => 'required',
-                'nationality' => 'required',
-                'languages_spoken_at_home' => 'required',
-                'follow_up_reasons' => 'required',
-                'school' => 'required',
-                'school_year' => 'required',
-                'mutuality' => 'required',
-                'family' => 'required',
-                'medical_background' => 'required',
-                'educational_background' => 'required',
-                'hobbies' => 'required',
-                'contacts' => 'required'
+                'birth_date' => 'nullable|date_format:Y-m-d',
+                'description' => 'nullable',
+                'national_number' => 'nullable',
+                'phone' => 'nullable',
+                'address' => 'nullable',
+                'nationality' => 'nullable',
+                'languages_spoken_at_home' => 'nullable',
+                'follow_up_reasons' => 'nullable',
+                'school' => 'nullable',
+                'school_year' => 'nullable',
+                'mutuality' => 'nullable',
+                'family' => 'nullable',
+                'medical_background' => 'nullable',
+                'educational_background' => 'nullable',
+                'hobbies' => 'nullable',
+                'contacts' => 'nullable'
             ]
         );
         if ($validator->fails()) {
