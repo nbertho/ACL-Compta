@@ -5,6 +5,7 @@
       @filterByFirstName="updateFirstNameFilter"
       @filterByLastName="updateLastNameFilter"
       @filterByDate="updateDateFilter"
+      @filterByLocation="updateLocationFilter"
       @resetFilters="resetFilters"
     />
     <ul class="mt-8" v-if="sessions.length !== 0">
@@ -31,6 +32,7 @@ export default ({
     return {
       firstNameFilter: null,
       lastNameFilter: null,
+      locationFilter: null,
       dateFilter: null,
     }
   },
@@ -44,9 +46,13 @@ export default ({
     updateDateFilter(data) {
       this.dateFilter = data;
     },
+    updateLocationFilter(data) {
+      this.locationFilter = data;
+    },
     resetFilters() {
       this.firstNameFilter= null;
       this.lastNameFilter= null;
+      this.locationFilter = null;
       this.dateFilter= null;
     }
   },
@@ -72,6 +78,12 @@ export default ({
       if (this.dateFilter !== null) {
         sessionsArray = sessionsArray.filter(el => {
           return el.date.startsWith(this.dateFilter);
+        })
+      }
+
+      if (this.locationFilter !== null) {
+        sessionsArray = sessionsArray.filter(el => {
+          return el.session_type.location_id == this.locationFilter;
         })
       }
 

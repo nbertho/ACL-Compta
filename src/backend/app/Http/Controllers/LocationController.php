@@ -16,7 +16,7 @@ class LocationController extends Controller
     public function index()
     {
         $locations = Locations::query()
-            ->orderBy('name', 'DESC')
+            ->orderBy('name', 'ASC')
             ->get();
         return JsonHelper::formatResponse($locations);
     }

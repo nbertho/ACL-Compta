@@ -25,6 +25,10 @@ export default {
     .then(response => {
       store.dispatch('setPatients', response.data.data);
     });
+    axios.get(appConstants.api.urlPath + appConstants.api.locationsList)
+    .then(response => {
+      store.dispatch('setLocations', response.data.data);
+    });
   }
 }
 </script>
