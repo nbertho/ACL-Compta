@@ -40,7 +40,6 @@ export default ({
       this.lastNameFilter = data;
     },
     updateDobFilter(data) {
-      console.log(data);
       this.dobFilter = data;
     },
     resetFilters() {

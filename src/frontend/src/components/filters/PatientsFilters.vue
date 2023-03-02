@@ -6,7 +6,7 @@
           <button @click="toggleDisplay" class="mr-16 py-2 px-4 bg-slate-600 text-white rounded-md text-lg">{{ filtersTitle }}</button>
           <button v-if="activeFilters !== ''" @click="resetFilters" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Effacer les filtres</button>
         </div>
-        <div>
+        <div class="flex justify-end">
           <button @click="$router.push({name: 'add-patient'})" class="btn py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Ajouter un nouveau patient</button>
         </div>
       </div>

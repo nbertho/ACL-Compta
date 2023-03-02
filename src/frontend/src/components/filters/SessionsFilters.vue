@@ -1,24 +1,32 @@
 <template>
   <section>
     <div>
-      <div class="flex flex-row justify-between">
-        <button @click="toggleDisplay" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">{{ filtersTitle }}</button>
-        <button v-if="activeFilters !== ''" @click="resetFilters" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Effacer les filtres</button>
+      <div class="grid grid-cols-2">
+        <div class="flex">
+          <button @click="toggleDisplay" class="mr-16 py-2 px-4 bg-slate-600 text-white rounded-md text-lg">{{ filtersTitle }}</button>
+          <button v-if="activeFilters !== ''" @click="resetFilters" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Effacer les filtres</button>
+        </div>
+        <div class="flex justify-end">
+          <button @click="$router.push({name: 'help'})" class="btn py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Ajouter une scéance</button>
+        </div>
       </div>
       <p v-if="activeFilters !== ''" class="text-left p-4">Filtres actifs :{{ activeFilters }}</p>
     </div>
     <div v-if="isShown" class="grid grid-flow-col gap-4">
+
       <div class="col-span-4 flex flex-col">
         <label class="text-center" for="firstname">Prénom</label>
         <input type="text" name="firstname" v-model="firstName" @input="handleFirstNameInput" class="border border-gray-300 rounded-md" />
       </div>
+      
       <div class="col-span-4 flex flex-col">
         <label class="text-center" for="lastname">Nom de famille</label>
         <input type="text" name="lastname" v-model="lastName" @input="handleLastNameInput" class="border border-gray-300 rounded-md" />
       </div>
+      
       <div class="col-span-4 flex flex-col">
-        <label class="text-center" for="dob">Année de naissance</label>
-        <input type="number" name="dob" v-model="dob" @input="handleDobNameInput" class="border border-gray-300 rounded-md" />
+        <label class="text-center" for="date">Date</label>
+        <input type="date" name="date" v-model="date" @input="handleDateNameInput" class="border border-gray-300 rounded-md" />
       </div>
     </div>
   </section>
@@ -32,14 +40,14 @@ export default ({
       isShown: false,
       firstName: '',
       lastName: '',
-      dob: null
+      date: null
     }
   },
   methods: {
     resetFilters() {
       this.firstName= '';
       this.lastName= '';
-      this.dob= null;
+      this.date= null;
       this.$emit('resetFilters');
     },
     toggleDisplay() {
@@ -51,11 +59,11 @@ export default ({
     handleLastNameInput() {
       this.$emit('filterByLastName', this.lastName);
     },
-    handleDobNameInput() {
-      if (this.dob === '') {
-        this.dob = null;
+    handleDateNameInput() {
+      if (this.date === '') {
+        this.date = null;
       }
-      this.$emit('filterByDob', this.dob);
+      this.$emit('filterByDate', this.date);
     },
   },
   computed: {
@@ -70,8 +78,8 @@ export default ({
       if (this.lastName !== '') {
         activeFilters.push('Nom de famille : ' + this.lastName)
       }
-      if (this.dob !== null) {
-        activeFilters.push('Date de naissance : ' + this.dob)
+      if (this.date !== null) {
+        activeFilters.push('Date : ' + this.date)
       }
       return activeFilters.join(', ');
     }
