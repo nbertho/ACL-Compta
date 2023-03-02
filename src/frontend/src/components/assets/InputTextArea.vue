@@ -13,7 +13,7 @@
     </div>
     <div v-else>
       <p class="underline mb-2"><strong>{{ text }}</strong></p>
-      <div v-html="value.replace(/(?:\r\n|\r|\n)/g, '<br>')"></div>
+      <div v-html="valueFormatted"></div>
     </div>
   </section>
 </template>
@@ -39,5 +39,13 @@ export default ({
       default: true
     }
   },
+  computed: {
+    valueFormatted() {
+      if (this.value) {
+        return this.value.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      }
+      else return '';
+    }
+  }
 })
 </script>

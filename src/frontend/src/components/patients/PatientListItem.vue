@@ -5,7 +5,7 @@
   >
     <div class="col-span-4 flex flex-col justify-around">
       <p><strong>{{ patient.lastname }}</strong> {{ patient.firstname }}</p>
-      <p>Num. nat : {{ patient.national_number }}</p>
+      <p>NISS : {{ patient.national_number }}</p>
     </div>
     <div class="col-span-4 flex flex-col justify-around">
     </div>
