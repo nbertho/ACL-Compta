@@ -43,13 +43,13 @@
 
 <script>
 import axios from 'axios';
-import appConstants from '../../app-config/app-constants';
-import InputText from '../assets/InputText';
-import InputTextArea from '../assets/InputTextArea';
-import ViewPageActions from '../assets/ViewPageActions';
+import appConstants from '@/app-config/app-constants';
+import InputText from '@/components/assets/InputText';
+import InputTextArea from '@/components/assets/InputTextArea';
+import ViewPageActions from '@/components/assets/ViewPageActions';
 
 export default({
-  name: 'PatientDetails',
+  name: 'PatientDetailsPage',
   components: { InputText, ViewPageActions, InputTextArea },
   data() {
     return {

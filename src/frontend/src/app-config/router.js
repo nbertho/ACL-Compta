@@ -6,32 +6,32 @@ export default createRouter({
     {
       name: 'home',
       path: '/',
-      component: () => import('../components/pages/HomePage')
+      component: () => import('@/pages/HomePage')
     },
     {
       name: 'patients',
       path: '/patients',
-      component: () => import('../components/pages/PatientsPage')
+      component: () => import('@/pages/Patients/PatientsIndexPage')
     },
     {
       name: 'add-patient',
       path: '/patient/new',
-      component: () => import('../components/pages/NewPatientForm')
+      component: () => import('@/pages/Patients/PatientNewPage')
     },
     {
       name: 'patientDetails',
       path: '/patients/:patientId',
-      component: () => import('../components/pages/PatientDetails')
+      component: () => import('@/pages/Patients/PatientDetailsPage')
     },
     {
       name: 'sessions',
       path: '/sessions',
-      component: () => import('../components/pages/SessionsPage')    
+      component: () => import('@/pages/Sessions/SessionsIndexPage')    
     },
     {
       name: 'help',
       path: '/help',
-      component: () => import('../components/pages/HelpPage')   
+      component: () => import('@/pages/HelpPage')   
      }
   ],
   scrollBehavior(comesFrom, goesTo, savedPosition) {

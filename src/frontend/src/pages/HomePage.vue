@@ -3,7 +3,7 @@
   <section class="container mx-auto mt-8">
     <h2 class="text-xl underline mb-4">Mes dernières séances</h2>
     <ul>
-      <SessionsItem 
+      <SessionListItem 
         v-for="session in latestSessions" 
         :key="session.id"
         :session="session"
@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import SessionsItem from '../session/SessionItem.vue';
+import SessionListItem from '@/components/sessions/SessionListItem';
 export default ({
   name: 'HomePage',
-  components: {SessionsItem},
+  components: {SessionListItem},
   data() {
     return {
       dataLoaded: false,

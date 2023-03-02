@@ -12,7 +12,9 @@ export default createStore({
   getters: {
     getPatients(state) {
       return state.patients.sort((a, b) => {
-        a.lastname.localeCompare(b.lastname)
+        const aLastName = a.lastname.toLowerCase();
+        const bLastName = b.lastname.toLowerCase();
+        return aLastName.localeCompare(bLastName)
       });
     },
     getPatientById: (state) => (id) => {

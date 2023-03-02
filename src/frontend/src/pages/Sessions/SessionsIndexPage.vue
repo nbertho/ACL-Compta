@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import SessionItem from '../session/SessionItem.vue';
-import SessionsFilters from '../filters/SessionsFilters.vue';
+import SessionItem from '@/components/sessions/SessionListItem';
+import SessionsFilters from '@/components/filters/SessionsFilters';
 
 export default ({
-  name: 'SessionPage',
+  name: 'SessionsIndexPage',
   components: { SessionItem, SessionsFilters },
   data() {
     return {

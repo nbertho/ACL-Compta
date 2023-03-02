@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import PatientsFilter from '../filters/PatientsFilters';
-import PatientListItem from '../patients/PatientListItem';
+import PatientsFilter from '@/components/filters/PatientsFilters';
+import PatientListItem from '@/components/patients/PatientListItem';
 export default ({
-  name: 'PatientsPage',
+  name: 'PatientsIndexPage',
   components: {PatientsFilter, PatientListItem},
   data() {
     return {
@@ -70,7 +70,10 @@ export default ({
 
       if (this.dobFilter !== null) {
         patientsArray = patientsArray.filter(el => {
-          return el.birth_date.startsWith(this.dobFilter);
+          console.log(el);
+          if (el.birth_date) {
+            return el.birth_date.startsWith(this.dobFilter);
+          }
         })
       }
 

@@ -39,12 +39,12 @@
 
 <script>
 import axios from 'axios';
-import appConstants from '../../app-config/app-constants';
-import InputText from '../assets/InputText';
-import InputTextArea from '../assets/InputTextArea';
+import appConstants from '@/app-config/app-constants';
+import InputText from '@/components/assets/InputText';
+import InputTextArea from '@/components/assets/InputTextArea';
 
 export default({
-  name: 'PatientDetails',
+  name: 'PatientNewPage',
   components: { InputText, InputTextArea },
   data() {
     return {
