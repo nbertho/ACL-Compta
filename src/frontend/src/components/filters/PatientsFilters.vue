@@ -1,9 +1,14 @@
 <template>
   <section>
     <div>
-      <div class="flex flex-row justify-between">
-        <button @click="toggleDisplay" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">{{ filtersTitle }}</button>
-        <button v-if="activeFilters !== ''" @click="resetFilters" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Effacer les filtres</button>
+      <div class="grid grid-cols-2">
+        <div class="flex">
+          <button @click="toggleDisplay" class="mr-16 py-2 px-4 bg-slate-600 text-white rounded-md text-lg">{{ filtersTitle }}</button>
+          <button v-if="activeFilters !== ''" @click="resetFilters" class="py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Effacer les filtres</button>
+        </div>
+        <div>
+          <button @click="$router.push({name: 'add-patient'})" class="btn py-2 px-4 bg-slate-600 text-white rounded-md text-lg">Ajouter un nouveau patient</button>
+        </div>
       </div>
       <p v-if="activeFilters !== ''" class="text-left p-4">Filtres actifs :{{ activeFilters }}</p>
     </div>

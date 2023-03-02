@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Patient extends Model
 {
@@ -36,5 +37,18 @@ class Patient extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function sessions(): HasMany
+    {
+        return $this->hasMany(Session::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($patient) {
+            $patient->sessions()->delete();
+        });
+    }
 
 }

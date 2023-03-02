@@ -14,6 +14,11 @@ export default createRouter({
       component: () => import('../components/pages/PatientsPage')
     },
     {
+      name: 'add-patient',
+      path: '/patient/new',
+      component: () => import('../components/pages/NewPatientForm')
+    },
+    {
       name: 'patientDetails',
       path: '/patients/:patientId',
       component: () => import('../components/pages/PatientDetails')

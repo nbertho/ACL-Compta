@@ -5,12 +5,12 @@
   >
     <div class="col-span-4 flex flex-col justify-around">
       <p><strong>{{ patient.lastname }}</strong> {{ patient.firstname }}</p>
-      <p>NISS : {{ patient.national_number }}</p>
+      <p v-if="patient.national_number">NISS : {{ patient.national_number }}</p>
     </div>
     <div class="col-span-4 flex flex-col justify-around">
     </div>
-    <div class="col-span-4 flex flex-col justify-around">
-      <p>Année: {{ patient.birth_date.slice(0, 4) }}</p>
+    <div v-if="birthDate" class="col-span-4 flex flex-col justify-around">
+      <p>{{ birthDate }}</p>
     </div>
   </li>
 </template>
@@ -22,6 +22,14 @@ export default ({
     goToUserPage() {
       this.$router.push({name: 'patientDetails', params: {patientId: this.patient.id}})
     }
-  }
+  },
+  computed: {
+    birthDate() {
+      if (this.patient.birth_date) {
+        return 'Année: ' + this.patient.birth_date.slice(0, 4);
+      }
+      return false;
+    }
+  },
 })
 </script>

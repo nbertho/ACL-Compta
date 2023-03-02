@@ -43,8 +43,16 @@ export default createStore({
       }
     },
     updatePatient(state, data) {
-      const patientIndex = state.patients.findIndex(patient => patient.id == data.id)
+      const patientIndex = state.patients.findIndex(patient => patient.id == data.id);
       state.patients[patientIndex] = data;
+    },
+    removePatient(state, patientId) {
+      const patientIndex = state.patients.findIndex(patient => patient.id == patientId);
+      console.log(patientIndex);
+      state.patients.splice(patientIndex, 1);
+    },
+    addPatient(state, data) {
+      state.patients.push(data);
     },
     setSessions(state, data) {
       state.sessions = data;
@@ -74,6 +82,12 @@ export default createStore({
     },
     updatePatient({commit}, item) {
       commit('updatePatient', item);
+    },
+    removePatient({commit}, item) {
+      commit('removePatient', item);
+    },
+    addPatient({commit}, item) {
+      commit('addPatient', item);
     }
   }
 });
