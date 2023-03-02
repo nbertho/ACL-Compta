@@ -11,7 +11,9 @@ export default createStore({
   },
   getters: {
     getPatients(state) {
-      return state.patients;
+      return state.patients.sort((a, b) => {
+        a.lastname.localeCompare(b.lastname)
+      });
     },
     getPatientById: (state) => (id) => {
       return state.patients.find(patient => patient.id == id);

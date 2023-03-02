@@ -5,8 +5,8 @@
     class="container m-auto"
   >
     <div class="mt-8  grid grid-cols-12 gap-4">
-      <InputText class="col-span-4" attr="firstname" :value="patient.firstname" text="Prénom" :editMode="editMode" />
       <InputText class="col-span-4" attr="lastname" :value="patient.lastname" text="Nom" :editMode="editMode" />
+      <InputText class="col-span-4" attr="firstname" :value="patient.firstname" text="Prénom" :editMode="editMode" />
       <InputText class="col-span-4" attr="national_number" :value="patient.national_number" text="Numéro national" :editMode="editMode" />
       
       <InputText class="col-span-3" attr="birth_date" :value="patient.birth_date" text="Date de naissance" inputType="date" :editMode="editMode" />
