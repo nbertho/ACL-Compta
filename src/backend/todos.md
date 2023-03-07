@@ -1,1 +1,0 @@
-- [ ] Make location name unique to prevent duplicates
