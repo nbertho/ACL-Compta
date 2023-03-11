@@ -25,10 +25,11 @@ class ResponseHelper
     {
         $errorsArray = $validator->errors()->messages();
 
+
         return JsonHelper::formatResponse(
             [
                 'msg' => 'Error with field(s) : ' . join(', ', array_keys($errorsArray)),
-                'fields' => array_keys($errorsArray),
+                'fields' => $validator->errors()->all(),
             ],
             HttpCode::VALIDATION_MISSING_PARAMS,
             true

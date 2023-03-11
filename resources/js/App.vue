@@ -1,19 +1,58 @@
 <template>
   <TheHeader />
   <body class="py-8">
+    <ActionMsg 
+      :msg="actionMsg"
+      :errors="errorFields"
+      :bgColorClass="bgColor"
+      @resetMsg="resetActionMsg"
+    />
     <router-view></router-view>
   </body>
 </template>
 
 <script>
 import axios from 'axios';
-import appConstants from './app-config/app-constants.js';
-import TheHeader from './components/templates/TheHeader.vue';
+import appConstants from '@/app-config/app-constants.js';
+import TheHeader from '@/components/templates/TheHeader.vue';
+import ActionMsg from '@/components/assets/ActionMsg.vue';
 
 export default {
   name: 'App',
   components: {
-    TheHeader
+    TheHeader,
+    ActionMsg
+  },
+  data() {
+    return {
+      actionMsg: '',
+      errorFields: [],
+      bgColor: ''
+    }
+  },
+  methods: {
+    resetActionMsg() {
+      this.actionMsg = '';
+      this.errorFields = [];
+      this.bgColor = ''
+    },
+    setErrorActionMsg(message, errorFields = []) {
+      this.resetActionMsg();
+      this.actionMsg = message;
+      this.errorFields = errorFields;
+      this.bgColor = 'bg-red-400'
+    },
+    setSuccessActionMsg(message) {
+      this.resetActionMsg();
+      this.actionMsg = message;
+      this.bgColor = 'bg-green-400'
+    }
+  },
+  provide() {
+    return {
+      setErrorActionMsg: this.setErrorActionMsg,
+      setSuccessActionMsg: this.setSuccessActionMsg,
+    }
   },
   mounted() {
     const store = this.$store;

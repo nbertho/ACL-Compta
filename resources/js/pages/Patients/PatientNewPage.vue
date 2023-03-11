@@ -71,6 +71,7 @@ export default({
       }
     }
   },
+  inject: ['setErrorActionMsg', 'setSuccessActionMsg'],
   methods: {
     handleForm(event) {
       const formData = new FormData(event.target);
@@ -89,9 +90,11 @@ export default({
           if (!response.data.error) {
             store.dispatch('addPatient', response.data.data);
             router.push({ name: 'patientDetails', params: { patientId: response.data.data.id } })
+            this.setSuccessActionMsg("Le patient a bien été créé");
           }
           else {
-            console.log(response)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            this.setErrorActionMsg("Attention, une erreur est survenue avec les champs suivants:", response.data.data.fields);
           }
         })
     },

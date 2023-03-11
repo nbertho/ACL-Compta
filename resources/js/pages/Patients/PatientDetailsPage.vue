@@ -10,6 +10,11 @@
       @delete-user="deleteCurrentUser"
       :editMode="editMode" 
     />
+
+    <div class="py-3">
+      <h1 class="text-4xl text-center underline">{{ patient.firstname }} {{ patient.lastname }}</h1>
+    </div>
+
     <div class="mt-8  grid grid-cols-12 gap-4">
       <InputText class="col-span-4" attr="lastname" :value="patient.lastname" text="Nom" :editMode="editMode" />
       <InputText class="col-span-4" attr="firstname" :value="patient.firstname" text="Prénom" :editMode="editMode" />
@@ -26,7 +31,7 @@
       <InputText class="col-span-4" attr="school_year" :value="patient.school_year" text="Année scolaire" :editMode="editMode" />
 
 
-      <InputTextArea class="col-span-6" attr="address" :value="patient.address" text="Addresse" :editMode="editMode" />
+      <InputTextArea class="col-span-6" attr="address" :value="patient.address" text="Adresse" :editMode="editMode" />
       <InputTextArea class="col-span-6" attr="contacts" :value="patient.contacts" text="Contacts" :editMode="editMode" />
       <InputTextArea class="col-span-6" attr="family" :value="patient.family" text="Famille" :editMode="editMode" />
 
@@ -86,6 +91,7 @@ export default({
       }
     }
   },
+  inject: ['setErrorActionMsg', 'setSuccessActionMsg'],
   methods: {
     toggleEditMode() {
       this.editMode = !this.editMode;
@@ -119,12 +125,14 @@ export default({
       if (!window.confirm('Voulez-vous vraiment supprimer ce patient?')) {
         return;
       }
+      const fullName = this.patient.firstname + ' ' + this.patient.lastname;
       const store = this.$store;
       axios.delete(appConstants.api.urlPath + appConstants.api.patientDelete + this.$route.params.patientId)
         .then(response => {
           if (!response.data.error) {
             store.dispatch('removePatient', this.$route.params.patientId);
             this.$router.push({name: 'patients'});
+            this.setSuccessActionMsg('Le patient ' + fullName + ' a été supprimé avec succès');
           } else {
             console.log(response)
           }
