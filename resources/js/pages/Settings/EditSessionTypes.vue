@@ -22,7 +22,7 @@
         </div>
 
         <div class="mx-4">
-          <InputMultiselectLocations 
+          <LocationsInput 
             class="border border-gray-300 rounded px-4 py-2 h-10" 
             attr="location_id"
             @selectOptionChanged="handleMultiselectNewChange"
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <SettingsListActions
+    <SessionTypesListItem
       v-for="session in sessions"
       :key="session.id"
       :dataObject="session"
@@ -52,13 +52,13 @@
 <script>
 import axios from 'axios';
 import appConstants from '@/app-config/app-constants.js';
-import SettingsListActions from '@/components/assets/SettingsListActions.vue';
-import InputMultiselectLocations from '@/components/assets/InputMultiselectLocations.vue';
+import SessionTypesListItem from '@/components/assets/SessionTypes/SessionTypesListItem.vue';
+import LocationsInput from '@/components/assets/Inputs/MultiSelects/Locations/LocationsInput.vue';
 
 export default({
   name: 'EditSessionTypes',
   inject: ['setErrorActionMsg', 'setSuccessActionMsg'],
-  components: { SettingsListActions, InputMultiselectLocations },
+  components: { SessionTypesListItem, LocationsInput },
   data() {
     return {
       newName: '',

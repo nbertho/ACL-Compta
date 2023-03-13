@@ -40,8 +40,8 @@
 <script>
 import axios from 'axios';
 import appConstants from '@/app-config/app-constants.js';
-import InputText from '@/components/assets/InputText.vue';
-import InputTextArea from '@/components/assets/InputTextArea.vue';
+import InputText from '@/components/assets/Inputs/InputText.vue';
+import InputTextArea from '@/components/assets/Inputs/InputTextArea.vue';
 
 export default({
   name: 'PatientNewPage',

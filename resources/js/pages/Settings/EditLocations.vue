@@ -22,7 +22,7 @@
         >Effacer</button>
       </div>
     </div>
-    <SettingsListActions
+    <LocationListItem
       v-for="location in locations"
       :key="location.id"
       :dataObject="location"
@@ -33,13 +33,13 @@
 <script>
 import axios from 'axios';
 import appConstants from '@/app-config/app-constants.js';
-import SettingsListActions from '@/components/assets/SettingsListActions.vue';
+import LocationListItem from '@/components/assets/Locations/LocationListItem.vue';
 
 
 export default({
   name: 'EditLocations',
   inject: ['setErrorActionMsg', 'setSuccessActionMsg'],
-  components: { SettingsListActions },
+  components: { LocationListItem },
   data() {
     return {
       newName: '',

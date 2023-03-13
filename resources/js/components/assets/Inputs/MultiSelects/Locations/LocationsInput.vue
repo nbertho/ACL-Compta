@@ -7,7 +7,7 @@
 
 <script>
 export default ({
-  name: 'InputMultiselectLocations',
+  name: 'LocationsInput',
   data() {
     return {
       location_id: null

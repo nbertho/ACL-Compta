@@ -7,7 +7,7 @@
 
 <script>
 export default ({
-  name: 'InputMultiselectSessionsType',
+  name: 'SessionsTypesInput',
   data() {
     return {
       session_type_id: null
