@@ -1,5 +1,6 @@
 <template>
     <select :name="attr" v-model="session_type_id">
+      <option value="0">&nbsp;</option>
       <option v-for="session in sessionsType" :key="session.id" :value="session.id">{{ session.name }}</option>
     </select>
 </template>
@@ -25,13 +26,6 @@ export default ({
     this.session_type_id = this.currentValue;
   },
   computed: {
-    currentSession() {
-      if (this.currentValue) {
-        return this.$store.getters.getSessionTypeById(this.currentValue);
-      } else {
-        return null;
-      }
-    },
     sessionsType() {
       return this.$store.getters.getSessionType;
     },

@@ -44,5 +44,3 @@ Route::post('/patient/create', [PatientsController::class, 'create']);
 Route::put('/patient/update/{patient_id}', [PatientsController::class, 'update']);
 Route::delete('/patient/delete/{patient_id}', [PatientsController::class, 'delete']);
 Route::get('/patient/sessions/list/{patient_id}', [PatientsController::class, 'getPatientSessions']);
-
-

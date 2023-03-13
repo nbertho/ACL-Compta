@@ -63,6 +63,9 @@ export default createStore({
     addPatient(state, data) {
       state.patients.push(data);
     },
+    addLocation(state, data) {
+      state.locations.push(data);
+    },
     setSessions(state, data) {
       state.sessions = data;
     },
@@ -97,6 +100,9 @@ export default createStore({
     },
     addPatient({commit}, item) {
       commit('addPatient', item);
+    },
+    addLocation({commit}, item) {
+      commit('addLocation', item)
     }
   }
 });

@@ -30,8 +30,9 @@ export default ({
         { name: 'Accueil', pathName: 'home' },
         { name: 'Patients', pathName: 'patients' },
         { name: 'Séances', pathName: 'sessions' },
+        { name: 'Paramètres', pathName: 'settings' },
         { name: 'Aide', pathName: 'help' },
-      ]
+      ],
     }
   },
   methods: {

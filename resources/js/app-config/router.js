@@ -34,6 +34,21 @@ export default createRouter({
       component: () => import('@/pages/Sessions/SessionDetailsPage.vue')
     },
     {
+      name: 'settings',
+      path: '/settings',
+      component: () => import('@/pages/SettingsPage.vue')
+    },
+    {
+      name: 'settingsEditSessionType',
+      path: '/settings/session-type/edit',
+      component: () => import('@/pages/Settings/EditSessionTypes.vue')
+    },
+    {
+      name: 'settingsEditLocations',
+      path: '/settings/locations/edit',
+      component: () => import('@/pages/Settings/EditLocations.vue')
+    },
+    {
       name: 'help',
       path: '/help',
       component: () => import('@/pages/HelpPage.vue')   
