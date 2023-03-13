@@ -36,7 +36,6 @@ export default({
     }
   },
   mounted() {
-    console.log(this.dataObject);
     this.id = this.dataObject.id;
     let objectKeys = Object.keys(this.dataObject);
     this.dataKeys = objectKeys.filter((elem) => { return elem !== 'id'});;

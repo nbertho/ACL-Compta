@@ -66,6 +66,9 @@ export default createStore({
     addLocation(state, data) {
       state.locations.push(data);
     },
+    addSessionType(state, data) {
+      state.session_types.push(data);
+    },
     setSessions(state, data) {
       state.sessions = data;
     },
@@ -103,6 +106,9 @@ export default createStore({
     },
     addLocation({commit}, item) {
       commit('addLocation', item)
+    },
+    addSessionType({commit}, item) {
+      commit('addSessionType', item)
     }
   }
 });
