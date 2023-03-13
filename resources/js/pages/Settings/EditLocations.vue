@@ -22,6 +22,7 @@
         >Effacer</button>
       </div>
     </div>
+    <hr class="mt-4 mb-8 border border-gray-600">
     <LocationListItem
       v-for="location in locations"
       :key="location.id"

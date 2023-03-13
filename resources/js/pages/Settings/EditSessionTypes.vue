@@ -40,7 +40,7 @@
         >Effacer</button>
       </div>
     </div>
-
+    <hr class="mt-4 mb-8 border border-gray-600">
     <SessionTypesListItem
       v-for="session in sessions"
       :key="session.id"
