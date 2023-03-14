@@ -62,12 +62,10 @@ export default({
       .then(response => {
         if (!response.data.error) {
           store.dispatch('addLocation', response.data.data);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
           this.setSuccessActionMsg("Emplacement créé avec succès");
           this.resetNewForm();
         }
         else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
           this.setErrorActionMsg("Attention, une erreur est survenue avec le(s) champ(s) suivant(s):", response.data.data.fields);
         }
       })

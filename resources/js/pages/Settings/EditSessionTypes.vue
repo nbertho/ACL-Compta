@@ -87,12 +87,10 @@ export default({
         console.log(response)
         if (!response.data.error) {
           store.dispatch('addSessionType', response.data.data);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
           this.setSuccessActionMsg("Type créé avec succès");
           this.resetNewForm();
         }
         else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
           this.setErrorActionMsg("Attention, une erreur est survenue avec le(s) champ(s) suivant(s):", response.data.data.fields);
         }
       })

@@ -93,7 +93,6 @@ export default({
             this.setSuccessActionMsg("Le patient a bien été créé");
           }
           else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
             this.setErrorActionMsg("Attention, une erreur est survenue avec les champs suivants:", response.data.data.fields);
           }
         })

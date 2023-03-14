@@ -18,7 +18,6 @@ export default {
   },
   removePatient(state, patientId) {
     const patientIndex = state.patients.findIndex(patient => patient.id == patientId);
-    console.log(patientIndex);
     state.patients.splice(patientIndex, 1);
   },
   updatePatient(state, data) {
@@ -49,4 +48,8 @@ export default {
   addLocation(state, data) {
     state.locations.push(data);
   },
+  removeLocation(state, locationId) {
+    const locationIndex = state.locations.findIndex(location => location.id == locationId);
+    state.locations.splice(locationIndex, 1);
+  }
 }

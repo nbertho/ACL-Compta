@@ -40,6 +40,8 @@ export default {
   addLocation({commit}, item) {
     commit('addLocation', item)
   },
-
+  removeLocation({commit}, items) {
+    commit('removeLocation', items);
+  },
 
 }

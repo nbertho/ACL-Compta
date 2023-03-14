@@ -12,7 +12,7 @@
       >Modifier</button>
 
       <button 
-        @click.prevent="deleteUser" 
+        @click.prevent="deleteItem" 
         class="py-2 px-4 bg-red-500 text-white rounded-md text-lg"
       >Supprimer</button>
     </div>
@@ -20,6 +20,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+import appConstants from '@/app-config/app-constants.js';
+
 export default({
   name: 'LocationListItem',
   data() {
@@ -29,16 +32,35 @@ export default({
       dataKeys: []
     }
   },
+  inject: ['setErrorActionMsg', 'setSuccessActionMsg'],
   props: {
     dataObject: {
       type: Object,
       required: true,
     }
   },
+  methods: {
+    deleteItem() {
+      if (!window.confirm('Voulez-vous vraiment supprimer cet emplacement? Toute les données associées seront également supprimées')) {
+        return;
+      }
+
+      const store = this.$store;
+      axios.delete(appConstants.api.urlPath + appConstants.api.locationDelete + this.id)
+        .then(response => {
+          if (!response.data.error) {
+            store.dispatch('removeLocation', this.id);            
+            this.setSuccessActionMsg("L'emplacement a été supprimé avec succès");
+          } else {
+            this.setErrorActionMsg("Une erreur est survenue et l'emplacement n'a pas pu être supprimé")
+          }
+        })
+    }
+  },
   mounted() {
     this.id = this.dataObject.id;
     let objectKeys = Object.keys(this.dataObject);
-    this.dataKeys = objectKeys.filter((elem) => { return elem !== 'id'});;
+    this.dataKeys = objectKeys.filter((elem) => { return elem !== 'id'});
   }
 })
 </script>

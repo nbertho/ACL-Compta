@@ -40,12 +40,14 @@ export default {
       this.resetActionMsg();
       this.actionMsg = message;
       this.errorFields = errorFields;
-      this.bgColor = 'bg-red-400'
+      this.bgColor = 'bg-red-400';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     },
     setSuccessActionMsg(message) {
       this.resetActionMsg();
       this.actionMsg = message;
-      this.bgColor = 'bg-green-400'
+      this.bgColor = 'bg-green-400';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   },
   provide() {
