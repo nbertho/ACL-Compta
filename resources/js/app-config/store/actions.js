@@ -31,6 +31,9 @@ export default {
   addSessionType({commit}, item) {
     commit('addSessionType', item)
   },
+  removeSessionType({commit}, itemId) {
+    commit('removeSessionType', itemId)
+  },
 
 
   // Locations

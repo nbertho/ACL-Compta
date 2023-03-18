@@ -38,4 +38,7 @@ export default {
   getLocations(state) {
     return state.locations;
   },
+  getLocationById: (state) => (id) => {
+    return state.locations.find(location => location.id == id);
+  },
 }

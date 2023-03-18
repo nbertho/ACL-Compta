@@ -39,6 +39,10 @@ export default {
   addSessionType(state, data) {
     state.session_types.push(data);
   },
+  removeSessionType(state, stId) {
+    const sessionTypeIndex = state.session_types.findIndex(st => st.id == stId);
+    state.session_types.splice(sessionTypeIndex, 1);
+  },
 
   
   // Locations

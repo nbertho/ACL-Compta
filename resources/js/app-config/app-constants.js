@@ -9,6 +9,7 @@ export default {
     locationDelete: '/api/locations/delete/',
     sessionTypeList: '/api/session-types',
     sessionTypeCreate: '/api/session-type/create',
+    sessionTypeDelete: '/api/session-type/delete/',
     patientFind: '/api/patient/',
     patientCreate: '/api/patient/create',
     patientUpdate: '/api/patient/update/',
